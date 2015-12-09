@@ -15,8 +15,8 @@ createZGroupList n = next seq where
               then [xs] ++ next (tail xs ++ [head xs])
               else [xs]
 
-prettyPrint :: Int -> Matrix Int
-prettyPrint x = fromLists (createZGroupList x)
+createZGroupTable :: Int -> Matrix Int
+createZGroupTable x = fromLists (createZGroupList x)
 
 createZxZGroup :: Int -> Int -> [[Int]]
 createZxZGroup 0 0 = [[0, 0]]
@@ -25,6 +25,12 @@ createZxZGroup x 0 = [[x, 0] | x<-[0..x-1]]
 createZxZGroup x y = [[x, y] | x<-[0..x-1], y<-[0..y-1]]
 --createZxZGroup x y = [concatDigits [x, y] | x<-[0..x-1], y<-[0..y-1]]
 --    where concatDigits = foldl ((+).(*10)) 0
+
+--createZxZGroupTable :: [[Int]]
+
+findSubgroupsZGroup :: [Int] -> [[Int]]
+findSubgroupsZGroup [] = [[]]
+findSubgroupsZGroup (x:xs) = [[x]]++[xs]
 
 findOrderZxZGroup :: [(Int, Int)] -> Maybe Int
 findOrderZxZGroup [] = Nothing
