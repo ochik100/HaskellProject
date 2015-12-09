@@ -2,6 +2,7 @@ module ZGroup where
 
 import Group
 import Data.Matrix
+import Data.List
 
 createZGroup :: Int -> [Int]
 createZGroup 0 = []
@@ -14,6 +15,14 @@ createZGroupList n = next seq where
   next xs = if (tail xs ++ [head xs]) /= seq
               then [xs] ++ next (tail xs ++ [head xs])
               else [xs]
+
+findSub :: Int -> Int -> [Int]
+findSub 0 n = [0]
+findSub gen n = [0] ++ [value] ++ next value where
+    value = modulus n gen 0
+    next val = if (modulus n gen val) == 0
+                then []--[0] ++ [value]
+                else [modulus n gen val] ++ next (modulus n gen val)
 
 createZGroupTable :: Int -> Matrix Int
 createZGroupTable x = fromLists (createZGroupList x)
@@ -28,9 +37,19 @@ createZxZGroup x y = [[x, y] | x<-[0..x-1], y<-[0..y-1]]
 
 --createZxZGroupTable :: [[Int]]
 
-findSubgroupsZGroup :: [Int] -> [[Int]]
-findSubgroupsZGroup [] = [[]]
-findSubgroupsZGroup (x:xs) = [[x]]++[xs]
+--findSubgroupsZGroup :: [Int] -> [[Int]]
+--findSubgroupsZGroup [] = [[]]
+--findSubgroupsZGroup (x:xs) = [[0]]++[genSubgroup xs]
+--    where genSubgroup (x:xs) = if modulus x n /= 0 
+--                                then [x] ++ genSubgroup [modulus x n]
+--                                else []
+--         n = (length xs)+1
+
+
+
+
+modulus :: Int -> Int -> Int -> Int
+modulus n x y = (x+y) `mod` n
 
 findOrderZxZGroup :: [(Int, Int)] -> Maybe Int
 findOrderZxZGroup [] = Nothing
