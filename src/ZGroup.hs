@@ -16,14 +16,6 @@ createZGroupList n = next seq where
               then [xs] ++ next (tail xs ++ [head xs])
               else [xs]
 
-findSub :: Int -> Int -> [Int]
-findSub 0 n = [0]
-findSub gen n = [0] ++ [value] ++ next value where
-    value = modulus n gen 0
-    next val = if (modulus n gen val) == 0
-                then []--[0] ++ [value]
-                else [modulus n gen val] ++ next (modulus n gen val)
-
 createZGroupTable :: Int -> Matrix Int
 createZGroupTable x = fromLists (createZGroupList x)
 
@@ -37,16 +29,18 @@ createZxZGroup x y = [[x, y] | x<-[0..x-1], y<-[0..y-1]]
 
 --createZxZGroupTable :: [[Int]]
 
---findSubgroupsZGroup :: [Int] -> [[Int]]
---findSubgroupsZGroup [] = [[]]
---findSubgroupsZGroup (x:xs) = [[0]]++[genSubgroup xs]
---    where genSubgroup (x:xs) = if modulus x n /= 0 
---                                then [x] ++ genSubgroup [modulus x n]
---                                else []
---         n = (length xs)+1
+findSubgroupsZGroup :: [Int] -> [[Int]]
+findSubgroupsZGroup [] = [[]]
+findSubgroupsZGroup zgroup = map (findSub n) zgroup where
+    n = length zgroup
 
-
-
+findSub :: Int -> Int -> [Int]
+findSub 0 n = [0]
+findSub n gen = [0] ++ [value] ++ next value where
+    value = modulus n gen 0
+    next val = if (modulus n gen val) == 0
+                then []
+                else [modulus n gen val] ++ next (modulus n gen val)
 
 modulus :: Int -> Int -> Int -> Int
 modulus n x y = (x+y) `mod` n

@@ -12,4 +12,5 @@ main = do
     --putStrLn $ show (createZGroup 6)
     putStrLn $ show (createZGroupTable 6)
     --putStrLn $ show (findSubgroupsZGroup (createZGroup 4))
-    putStrLn $ show (findSub 1 6)
+    putStrLn $ show (findSub 6 1)
+    putStrLn $ show (findSubgroupsZGroup (createZGroup 5))
