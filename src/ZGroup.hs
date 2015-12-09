@@ -45,9 +45,9 @@ findSub n gen = [0] ++ [value] ++ next value where
 modulus :: Int -> Int -> Int -> Int
 modulus n x y = (x+y) `mod` n
 
---findCyclicGen
+--findCyclicGenerators :: I
 
-findOrderZxZGroup :: [[Int]] -> Maybe Int
+findOrderZxZGroup :: [[Int]] -> Maybe Int 
 findOrderZxZGroup [[]] = Nothing
 findOrderZxZGroup zxz = Just (length zxz)
 

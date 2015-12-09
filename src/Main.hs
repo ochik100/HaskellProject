@@ -18,4 +18,5 @@ main = do
     putStrLn $ show (findSub 10 3)
     putStrLn $ show (findOrderZGroup (findSub 10 3))
     putStrLn $ show (findIndex (createZGroup 10) (findSub 10 3))
+    putStrLn $ show (equals (createZGroup 5) [0, 1, 2, 3, 4])
     
