@@ -35,7 +35,7 @@ findSubgroupsZGroup zgroup = map (findSub n) zgroup where
     n = length zgroup
 
 findSub :: Int -> Int -> [Int]
-findSub 0 n = [0]
+findSub n 0 = [0]
 findSub n gen = [0] ++ [value] ++ next value where
     value = modulus n gen 0
     next val = if (modulus n gen val) == 0
@@ -45,8 +45,10 @@ findSub n gen = [0] ++ [value] ++ next value where
 modulus :: Int -> Int -> Int -> Int
 modulus n x y = (x+y) `mod` n
 
-findOrderZxZGroup :: [(Int, Int)] -> Maybe Int
-findOrderZxZGroup [] = Nothing
+--findCyclicGen
+
+findOrderZxZGroup :: [[Int]] -> Maybe Int
+findOrderZxZGroup [[]] = Nothing
 findOrderZxZGroup zxz = Just (length zxz)
 
 findOrderGroupTable :: [[Int]] -> Maybe Int
@@ -55,8 +57,10 @@ findOrderGroupTable group = if isGroup group
                     then Just (length group)
                     else Nothing
 
-findOrderGroup :: Int -> Maybe Int
-findOrderGroup 0 = Just 0
-findOrderGroup n = if isGroup (createZGroupList n)
-                      then Just n
-                      else Nothing
+findOrderZGroup :: [Int] -> Int
+findOrderZGroup [] = 0
+findOrderZGroup [0] = 1
+findOrderZGroup zgroup = length zgroup
+
+findIndex :: [Int] -> [Int] -> Int
+findIndex group subgroup = (findOrderZGroup group) `div` (findOrderZGroup (subgroup))
