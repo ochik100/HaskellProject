@@ -45,8 +45,12 @@ findSub n gen = [0] ++ [value] ++ next value where
 modulus :: Int -> Int -> Int -> Int
 modulus n x y = (x+y) `mod` n
 
-findCyclicGenerators :: Int -> [Bool]
-findCyclicGenerators n = map (equals group) (findSubgroupsZGroup group)
+findCyclicGenerators :: Int -> [Int]
+findCyclicGenerators n = elemIndices True (map (equals group) (findSubgroupsZGroup group))
+    where group = createZGroup n
+
+findNonCyclicGenerators :: Int -> [Int]
+findNonCyclicGenerators n = elemIndices False (map (equals group) (findSubgroupsZGroup group))
     where group = createZGroup n
 
 equals :: [Int] -> [Int] -> Bool

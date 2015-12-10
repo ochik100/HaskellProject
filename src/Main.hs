@@ -18,4 +18,5 @@ main = do
     putStrLn $ show (findSub 10 3)
     putStrLn $ show (findOrderZGroup (findSub 10 3))
     putStrLn $ show (findIndex (createZGroup 10) (findSub 10 3))
-    putStrLn $ show (findCyclicGenerators 10)
+    putStrLn $ show (findCyclicGenerators 6)
+    putStrLn $ show (findNonCyclicGenerators 6)
