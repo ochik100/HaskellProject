@@ -4,9 +4,10 @@ import ZGroup
 import Data.Matrix
 
 createZxZGroup :: Int -> Int -> [(Int, Int)]
-createZxZGroup 0 0 = [(0, 0)]
-createZxZGroup 0 y = [(0, y) | y<-[0..y-1]]
-createZxZGroup x 0 = [(x, 0) | x<-[0..x-1]]
+createZxZGroup 0 0 = []
+createZxZGroup 1 1 = [(0, 0)]
+createZxZGroup 1 y = [(0, y) | y<-[0..y-1]]
+createZxZGroup x 1 = [(x, 0) | x<-[0..x-1]]
 createZxZGroup x y = [(x, y) | x<-[0..x-1], y<-[0..y-1]]
 
 createZxZGroupList :: Int -> Int -> [(Int, Int)] -> [[(Int, Int)]]

@@ -20,6 +20,15 @@ createZGroupList n = next seq where
 createZGroupTable :: Int -> Matrix Int
 createZGroupTable x = fromLists (createZGroupList x)
 
+findMaybeInverses :: [[Int]] -> [Maybe Int]
+findMaybeInverses zgroup = map (elemIndex 0) zgroup
+
+findInverses :: Int -> [(Int, Int)]
+findInverses n = zip (zgroup) (map getInt maybeInv) 
+    where zgroup = createZGroup n
+          zgroupList = createZGroupList n
+          maybeInv = findMaybeInverses zgroupList
+
 findSubgroupsZGroup :: [Int] -> [[Int]]
 findSubgroupsZGroup [] = [[]]
 findSubgroupsZGroup zgroup = map (findSub n) zgroup where

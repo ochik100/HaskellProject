@@ -9,7 +9,7 @@ import ZxZGroup
 main :: IO ()
 main = do
     putStrLn $ show (createZGroup 10)
-    --putStrLn $ show (createZGroup 6)
+    putStrLn $ show (createZGroupList 10)
     putStrLn $ show (createZGroupTable 10)
     --putStrLn $ show (findSubgroupsZGroup (createZGroup 4))
     --putStrLn $ show (findSub 6 1)
@@ -24,3 +24,4 @@ main = do
     --putStrLn $ show (findSubgroupsZGroup (createZGroup 24))
     --putStrLn $ show (createZxZGroupList 2 2 (createZxZGroup 2 2))
     putStrLn $ show (createZxZGroupTable 3 6)
+    putStrLn $ show (findInverses 25)
