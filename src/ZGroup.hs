@@ -26,12 +26,6 @@ createZxZGroup 0 y = [(0, y) | y<-[0..y-1]]
 createZxZGroup x 0 = [(x, 0) | x<-[0..x-1]]
 createZxZGroup x y = [(x, y) | x<-[0..x-1], y<-[0..y-1]]
 
---testing :: Int -> Int -> [[(Int, Int)]]
---testing a b = [map (operator a b val) (axb)] ++ [map (operator a b (next axb)) (axb)]
---    where val = (0, 0)
---          axb = createZxZGroup a b
---          next value = head value
-
 createZxZGroupList :: Int -> Int -> [(Int, Int)] -> [[(Int, Int)]]
 createZxZGroupList _ _ [] = []
 createZxZGroupList a b (x:xs) = [map (operator a b x) (axb)] ++ createZxZGroupList a b xs
