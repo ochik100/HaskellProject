@@ -20,23 +20,6 @@ createZGroupList n = next seq where
 createZGroupTable :: Int -> Matrix Int
 createZGroupTable x = fromLists (createZGroupList x)
 
-createZxZGroup :: Int -> Int -> [(Int, Int)]
-createZxZGroup 0 0 = [(0, 0)]
-createZxZGroup 0 y = [(0, y) | y<-[0..y-1]]
-createZxZGroup x 0 = [(x, 0) | x<-[0..x-1]]
-createZxZGroup x y = [(x, y) | x<-[0..x-1], y<-[0..y-1]]
-
-createZxZGroupList :: Int -> Int -> [(Int, Int)] -> [[(Int, Int)]]
-createZxZGroupList _ _ [] = []
-createZxZGroupList a b (x:xs) = [map (operator a b x) (axb)] ++ createZxZGroupList a b xs
-    where axb = createZxZGroup a b
-
-
-operator :: Int -> Int -> (Int, Int) -> (Int, Int) -> (Int, Int)
-operator a b first second = (x, y) where
-    x = modulus a (fst first) (fst second)
-    y = modulus b (snd first) (snd second)
-
 findSubgroupsZGroup :: [Int] -> [[Int]]
 findSubgroupsZGroup [] = [[]]
 findSubgroupsZGroup zgroup = map (findSub n) zgroup where
@@ -65,10 +48,6 @@ equals :: [Int] -> [Int] -> Bool
 equals group subgroups = if group == sort subgroups
                             then True
                             else False
-
-findOrderZxZGroup :: [[Int]] -> Maybe Int 
-findOrderZxZGroup [[]] = Nothing
-findOrderZxZGroup zxz = Just (length zxz)
 
 findOrderGroupTable :: [[Int]] -> Maybe Int
 findOrderGroupTable [[]] = Just 0

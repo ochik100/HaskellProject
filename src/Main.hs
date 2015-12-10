@@ -3,6 +3,7 @@ module Main where
 
 import Group
 import ZGroup
+import ZxZGroup
 
 -- | The main entry point.
 main :: IO ()
