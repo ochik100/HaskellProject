@@ -3,6 +3,7 @@ module ZGroup where
 import Group
 import Data.Matrix
 import Data.List
+import Data.Tuple
 
 createZGroup :: Int -> [Int]
 createZGroup 0 = []
@@ -19,15 +20,28 @@ createZGroupList n = next seq where
 createZGroupTable :: Int -> Matrix Int
 createZGroupTable x = fromLists (createZGroupList x)
 
-createZxZGroup :: Int -> Int -> [[Int]]
-createZxZGroup 0 0 = [[0, 0]]
-createZxZGroup 0 y = [[0, y] | y<-[0..y-1]]
-createZxZGroup x 0 = [[x, 0] | x<-[0..x-1]]
-createZxZGroup x y = [[x, y] | x<-[0..x-1], y<-[0..y-1]]
---createZxZGroup x y = [concatDigits [x, y] | x<-[0..x-1], y<-[0..y-1]]
---    where concatDigits = foldl ((+).(*10)) 0
+createZxZGroup :: Int -> Int -> [(Int, Int)]
+createZxZGroup 0 0 = [(0, 0)]
+createZxZGroup 0 y = [(0, y) | y<-[0..y-1]]
+createZxZGroup x 0 = [(x, 0) | x<-[0..x-1]]
+createZxZGroup x y = [(x, y) | x<-[0..x-1], y<-[0..y-1]]
 
---createZxZGroupTable :: [[Int]]
+--testing :: Int -> Int -> [[(Int, Int)]]
+--testing a b = [map (operator a b val) (axb)] ++ [map (operator a b (next axb)) (axb)]
+--    where val = (0, 0)
+--          axb = createZxZGroup a b
+--          next value = head value
+
+createZxZGroupList :: Int -> Int -> [(Int, Int)] -> [[(Int, Int)]]
+createZxZGroupList _ _ [] = []
+createZxZGroupList a b (x:xs) = [map (operator a b x) (axb)] ++ createZxZGroupList a b xs
+    where axb = createZxZGroup a b
+
+
+operator :: Int -> Int -> (Int, Int) -> (Int, Int) -> (Int, Int)
+operator a b first second = (x, y) where
+    x = modulus a (fst first) (fst second)
+    y = modulus b (snd first) (snd second)
 
 findSubgroupsZGroup :: [Int] -> [[Int]]
 findSubgroupsZGroup [] = [[]]
