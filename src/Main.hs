@@ -22,6 +22,10 @@ main = do
     putStrLn $ show (findNonCyclicGenerators 10)
     putStrLn $ show (createZxZGroup 3 6)
     --putStrLn $ show (findSubgroupsZGroup (createZGroup 24))
-    --putStrLn $ show (createZxZGroupList 2 2 (createZxZGroup 2 2))
     putStrLn $ show (createZxZGroupTable 3 6)
-    putStrLn $ show (findInverses 25)
+    putStrLn $ show (findZInverses 25)
+    putStrLn ""
+    putStrLn $ show (createZxZGroupList 2 3 (createZxZGroup 2 3))
+    putStrLn $ show (createZxZGroupTable 2 3)
+    putStrLn $ show (findInverseIndices (createZxZGroupList 2 3 (createZxZGroup 2 3)))
+    putStrLn $ show (findZxZInverses 5 5)

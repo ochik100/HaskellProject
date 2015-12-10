@@ -23,8 +23,8 @@ createZGroupTable x = fromLists (createZGroupList x)
 findMaybeInverses :: [[Int]] -> [Maybe Int]
 findMaybeInverses zgroup = map (elemIndex 0) zgroup
 
-findInverses :: Int -> [(Int, Int)]
-findInverses n = zip (zgroup) (map getInt maybeInv) 
+findZInverses :: Int -> Matrix (Int, Int)
+findZInverses n = fromList n 1 (zip (zgroup) (map getInt maybeInv))
     where zgroup = createZGroup n
           zgroupList = createZGroupList n
           maybeInv = findMaybeInverses zgroupList
