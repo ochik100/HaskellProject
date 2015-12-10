@@ -1,6 +1,7 @@
 module ZxZGroup where
 
 import ZGroup
+import Data.Matrix
 
 createZxZGroup :: Int -> Int -> [(Int, Int)]
 createZxZGroup 0 0 = [(0, 0)]
@@ -17,6 +18,10 @@ operator :: Int -> Int -> (Int, Int) -> (Int, Int) -> (Int, Int)
 operator a b first second = (x, y) where
     x = modulus a (fst first) (fst second)
     y = modulus b (snd first) (snd second)
+
+createZxZGroupTable :: Int -> Int -> Matrix (Int, Int)
+createZxZGroupTable a b = fromLists (createZxZGroupList a b axb)
+    where axb = createZxZGroup a b
 
 findOrderZxZGroup :: [(Int, Int)] -> Maybe Int 
 findOrderZxZGroup [] = Nothing
