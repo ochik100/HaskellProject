@@ -18,9 +18,9 @@ createZxZGroupList a b (x:xs) = [map (operator a b x) (axb)] ++ createZxZGroupLi
     where axb = createZxZGroup a b
 
 operator :: Int -> Int -> (Int, Int) -> (Int, Int) -> (Int, Int)
-operator a b first second = (x, y) where
-    x = modulus a (fst first) (fst second)
-    y = modulus b (snd first) (snd second)
+operator a b first second = (x, y) 
+    where x = modulus a (fst first) (fst second)
+          y = modulus b (snd first) (snd second)
 
 createZxZGroupTable :: Int -> Int -> Matrix (Int, Int)
 createZxZGroupTable a b = fromLists (createZxZGroupList a b axb)
@@ -29,7 +29,7 @@ createZxZGroupTable a b = fromLists (createZxZGroupList a b axb)
 findInverseIndices :: [[(Int, Int)]] -> [Int]
 findInverseIndices zxz = (map getInt (map (elemIndex (0, 0)) zxz))
 
-findZxZInverses :: Int -> Int -> Matrix ((Int, Int), (Int, Int))--[((Int, Int), (Int, Int))]
+findZxZInverses :: Int -> Int -> Matrix ((Int, Int), (Int, Int))
 findZxZInverses x y =  fromList (x*y) 1 (zip zxz (map ((zxz) !!) (findInverseIndices zxzList)))
     where zxz = createZxZGroup x y
           zxzList = createZxZGroupList x y zxz
