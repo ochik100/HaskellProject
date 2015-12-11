@@ -14,6 +14,8 @@ main = do
     putStrLn $ show (createZGroupTable 20)
     putStrLn $ "Verify that Z20 is a group: "
     putStrLn $ show (isGroup (createZGroupList 20))
+    putStrLn $ "\nIdentity of Group Z20:"
+    putStrLn $ show (getInt (findIdentity(createZGroupList 20)))
     putStrLn $ "\nGroup Z20 Inverses:"
     putStrLn $ show (findZInverses 20)
     putStrLn $ "\nFind subgroups of Z20:"
@@ -29,6 +31,8 @@ main = do
     putStrLn $ show (createZGroupTable 5)
     putStrLn $ "Verify that Z5 is a group: "
     putStrLn $ show (isGroup (createZGroupList 5))
+    putStrLn $ "\nIdentity of Group Z5:"
+    putStrLn $ show (getInt (findIdentity(createZGroupList 5)))
     putStrLn $ "\nGroup Z5 Inverses:"
     putStrLn $ show (findZInverses 5)
     putStrLn $ "\nFind subgroups of Z5:"
@@ -44,6 +48,8 @@ main = do
     putStrLn $ show (createZGroupTable 3)
     putStrLn $ "Verify that Z3 is a group: "
     putStrLn $ show (isGroup (createZGroupList 3))
+    putStrLn $ "\nIdentity of Group Z3:"
+    putStrLn $ show (getInt (findIdentity(createZGroupList 3)))
     putStrLn $ "\nGroup Z3 Inverses:"
     putStrLn $ show (findZInverses 3)
     putStrLn $ "\nFind subgroups of Z3:"
